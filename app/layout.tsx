@@ -4,8 +4,8 @@ import "@rainbow-me/rainbowkit/styles.css";
 import { Inter } from "next/font/google";
 import Providers from "./providers";
 import { headers } from "next/headers";
-import { ConnectBtn } from "@/components/connectButton";
 import Profile from "@/components/profile";
+import GlobalNavbar from "@/components/GlobalNavbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,10 +20,11 @@ export default function RootLayout({
       <body className={inter.className}>
 
         <Providers cookie={cookie}>
-        <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
+        {/* <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
         <ConnectBtn />
-      </div>
-          {children}
+      </div> */}
+<GlobalNavbar/> 
+           {children}
  
       <Profile />
 

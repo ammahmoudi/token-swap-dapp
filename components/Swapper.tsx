@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useAccount, useBlock, useBlockNumber } from 'wagmi';
 import { ethers } from 'ethers';
-import { UNISWAP_SEPOLIAETH_V2ROUTER02,UNISWAP_SEPOLIAETH_V2FACTORY } from '../data/uniswapAddresses';
+import {  UNISWAP_POLYGON_V2FACTORY, UNISWAP_POLYGON_V2ROUTER02 } from '../data/uniswapAddresses';
 
 import IUniswapV2Factory from '@uniswap/v2-core/build/IUniswapV2Factory.json'
 import IUniswapV2Router02 from '@uniswap/v2-periphery/build/IUniswapV2Router02.json'
@@ -32,8 +32,8 @@ import { toWeiCustom } from '@/utils/toWeiCustom';
 
 const Swapper = () => {
     const { address: recipientAddress } = useAccount();
-    const [tokenInAddress, setTokenInAddress] = useState<`0x${string}`>('0x779877A7B0D9E8603169DdbD7836e478b4624789');
-    const [tokenOutAddress, setTokenOutAddress] = useState<`0x${string}`>('0xbDeaD2A70Fe794D2f97b37EFDE497e68974a296d');
+    const [tokenInAddress, setTokenInAddress] = useState<`0x${string}`>('0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270');
+    const [tokenOutAddress, setTokenOutAddress] = useState<`0x${string}`>('0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174');
     const [amountIn, setAmountIn] = useState('0.1');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [error, setError] = useState('');
@@ -100,7 +100,7 @@ const calcDeadlineWagmiV2 = async () => {
         setIsSubmitting(true);
         try {
             const pairAddress = await simulateAndRead({
-                address: UNISWAP_SEPOLIAETH_V2FACTORY,
+                address: UNISWAP_POLYGON_V2FACTORY,
                 abi: IUniswapV2Factory.abi,
                 functionName: 'getPair',
                 args: [tokenInAddress, tokenOutAddress],
@@ -120,7 +120,7 @@ const calcDeadlineWagmiV2 = async () => {
                 address: tokenInAddress,
                 abi: erc20Abi,
                 functionName: 'approve',
-                args: [UNISWAP_SEPOLIAETH_V2ROUTER02, ethers.parseUnits(amountIn, 'ether')],
+                args: [UNISWAP_POLYGON_V2ROUTER02, ethers.parseUnits(amountIn, 'ether')],
             });
 
            
@@ -131,7 +131,7 @@ const calcDeadlineWagmiV2 = async () => {
     const path = [tokenInAddress, tokenOutAddress];
 
     const amountsOut = await simulateAndRead({
-        address: UNISWAP_SEPOLIAETH_V2ROUTER02,
+        address: UNISWAP_POLYGON_V2ROUTER02,
         abi: IUniswapV2Router02.abi,
         functionName: 'getAmountsOut',
         args: [ethers.parseUnits(amountIn, 'ether'), path],
@@ -155,7 +155,7 @@ const calcDeadlineWagmiV2 = async () => {
       })
 
             const swapHash = await simulateAndWrite({
-                address: UNISWAP_SEPOLIAETH_V2ROUTER02,
+                address: UNISWAP_POLYGON_V2ROUTER02,
                 abi: IUniswapV2Router02.abi,
                 functionName: 'swapExactTokensForTokens',
                 args: [ethers.parseUnits(amountIn, 'ether'), amountOutMin, path, recipientAddress, deadline],

@@ -2,7 +2,7 @@
 
 import { WagmiProvider, cookieToInitialState } from "wagmi";import { RainbowKitProvider, darkTheme } from "@rainbow-me/rainbowkit";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ChakraProvider } from '@chakra-ui/react'
+import {NextUIProvider} from "@nextui-org/react";
 
 import { config } from "../config";
 
@@ -27,10 +27,11 @@ export default function Providers({ children, cookie }: Props) {
             fontStack: "system",
             overlayBlur: "small",
           })}
-        >    <ChakraProvider>
+        >
+          <NextUIProvider>
 
           {children}
-          </ChakraProvider>
+          </NextUIProvider>
 
         </RainbowKitProvider>
       </QueryClientProvider>

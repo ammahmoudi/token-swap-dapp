@@ -8,7 +8,7 @@ import {
 } from "@rainbow-me/rainbowkit";
 import { useAccount, useDisconnect } from "wagmi";
 import { emojiAvatarForAddress } from "../emojiAvatarForAddress";
-import {Button} from '@chakra-ui/react';
+import { Button, ButtonGroup } from "@nextui-org/react";
 
 export const ConnectBtn = () => {
   const { isConnecting, address, isConnected, chain } = useAccount();
@@ -38,6 +38,7 @@ export const ConnectBtn = () => {
           openConnectModal?.();
         }}
         disabled={isConnecting}
+        color="primary"  variant="flat"
       >
         { isConnecting ? 'Connecting...' : 'Connect your wallet' }
       </Button>
@@ -46,34 +47,28 @@ export const ConnectBtn = () => {
 
   if (isConnected && !chain) {
     return (
-      <Button onClick={openChainModal}>
+      <Button onClick={openChainModal} color="primary"  variant="flat">
         Wrong network
       </Button>
     );
   }
 
   return (
-    <div className="max-w-5xl w-full flex items-center justify-between">
-      <div
-        className="flex justify-center items-center px-4 py-2 border border-neutral-700 bg-neutral-800/30 rounded-xl font-mono font-bold gap-x-2 cursor-pointer"
+    <div>
+          <ButtonGroup>
+
+      <Button
         onClick={async () => openAccountModal?.()}
-      >
-        <div
-          role="button"
-          tabIndex={1}
-          className="h-8 w-8 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden"
-          style={{
-            backgroundColor,
-            boxShadow: "0px 2px 2px 0px rgba(81, 98, 255, 0.20)",
-          }}
-        >
-          {emoji}
-        </div>
-        <p>Account</p>
-      </div>
-      <Button className="btn" onClick={openChainModal}>
+        className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg"
+        startContent={<>{emoji}</>}
+>
+
+        Account
+      </Button>
+      <Button className="btn" onClick={openChainModal} color="primary"  variant="flat">
         Switch Networks
       </Button>
+      </ButtonGroup>
     </div>
   );
 };
