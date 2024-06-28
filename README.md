@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Token Swap dApp
 
-## Getting Started
+![cover](/images/cover.jpg)
 
-First, run the development server:
+## Introduction
+The Token Swap dApp makes it easy to trade tokens. Just connect your wallet, like MetaMask, and you're ready to swap tokens by entering their addresses and the amount you want to trade.It is an exercise to explore the web 3.0 world and smart contracts connections.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
+- **Connect Wallets**: Quickly connect to MetaMask and other wallets.
+- **Swap Tokens**: Just type in the token addresses and how much you want to swap.
+- **Clean Design**: A user-friendly interface with Next UI and Chakra UI.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Try It Out
+Check out the dApp live here: [Token Swap dApp Demo](https://token-swap-dapp-gold.vercel.app).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Start Using It
+To set up the dApp on your computer:
+1. Download the code from the repository.
+2. Run `yarn install` to get the needed software.
+3. Use `yarn dev` to start the server.
+4. Go to `http://localhost:3000` to see the dApp.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Technologies
+Here's what  used to build the dApp:
+- **Next.js**: For fast and scalable apps.
+- **Wagmi v2 & RainbowKit**: For easy wallet connections.
+- **Chakra UI & Next UI**: For a great look and feel.
 
-## Learn More
+## Get Involved
+Want to help out?love contributions from the community!
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## License
+This project is open-source under the MIT License.
