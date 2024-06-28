@@ -1,8 +1,7 @@
-import styles from '@/app/page.module.css'
 export default function CoursesLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  return <div className={styles.main}>{children}</div>
+  return <main className="light flex min-h-screen flex-col items-center  justify-between p-12">{children}</main>
 }

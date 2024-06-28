@@ -3,54 +3,71 @@
 import { useAccount, useBalance, useEnsName } from "wagmi";
 import { middleEllipsis } from "../utils/middleEllipsis";
 import { formatUnits } from "viem";
+import { Card, CardBody, Skeleton, Snippet } from "@nextui-org/react";
+import Image from "next/image";
+import networkIcon from "../icons/network.svg";
 
 export default function Profile() {
-  const { address, chain } = useAccount();
+	const { address, chain } = useAccount();
 
-  const { data } = useBalance({
-    address,
-  });
+	const { data } = useBalance({
+		address,
+	});
 
-  const ens = useEnsName({
-    address,
-  });
+	const ens = useEnsName({
+		address,
+	});
 
-  return (
-    <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-      <div className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30">
-        <h2 className="mb-3 text-2xl font-semibold">Wallet address</h2>
-        <p className="m-0 w-[30ch] text-sm opacity-50">
-          {middleEllipsis(address as string, 12) || ""}
-        </p>
-      </div>
-
-      <div className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30">
-        <h2 className={`mb-3 text-2xl font-semibold`}>Network</h2>
-        <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-          {chain?.name || ""}
-        </p>
-      </div>
-
-      <div className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30">
-        <h2 className={`mb-3 text-2xl font-semibold`}>Balance</h2>
-        <div className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-          {data ? (
-            <p>
-              {Number(formatUnits(data.value, data.decimals)).toFixed(4)}{" "}
-              {data.symbol}
-            </p>
-          ) : (
-            <div />
-          )}
-        </div>
-      </div>
-
-      <div className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30">
-        <h2 className={`mb-3 text-2xl font-semibold`}>EnsName</h2>
-        <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-          {ens.data || ""}
-        </p>
-      </div>
-    </div>
-  );
+	return (
+		<div className="mb-32 grid gap-4 text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
+			<Skeleton isLoaded={data != null} className=" rounded-lg">
+				<Card className="xl:max-w-sm rounded-xl shadow-lg px-3 w-full">
+					<CardBody className="py-5 overflow-hidden">
+						<div className="flex gap-2.5">
+							<div className="flex ">
+								<Image src={networkIcon} height={20} width={20} alt="network" />
+								<span className="ml-2"> {chain?.name || ""}</span>
+							</div>
+						</div>
+						<div className="flex gap-2.5 py-2 items-center">
+							<span className=" text-xl font-semibold">
+								{" "}
+								{data ? (
+									<p>
+										{Number(formatUnits(data.value, data.decimals)).toFixed(4)}{" "}
+										{data.symbol}
+									</p>
+								) : (
+									<div />
+								)}
+							</span>
+						</div>
+					</CardBody>
+				</Card>
+			</Skeleton>
+			<Skeleton isLoaded={address != null} className=" rounded-lg">
+				<Card className="xl:max-w-sm rounded-xl shadow-lg px-3 w-full">
+					<CardBody className="py-5 overflow-hidden ">
+						<div className="flex gap-2.5">
+							<div className="flex ">
+								<span>Wallet Address</span>
+							</div>
+						</div>
+						<div className="flex gap-2.5 py-1.5  items-center">
+							<Snippet
+								symbol=""
+								variant="bordered"
+								className="py-0 border-0 "
+								codeString={address}
+							>
+								<span className=" text-xl font-semibold">
+									{middleEllipsis(address as string, 4) || ""}
+								</span>
+							</Snippet>
+						</div>
+					</CardBody>
+				</Card>
+			</Skeleton>
+		</div>
+	);
 }

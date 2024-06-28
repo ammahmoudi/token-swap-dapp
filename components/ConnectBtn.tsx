@@ -37,8 +37,8 @@ export const ConnectBtn = () => {
           }
           openConnectModal?.();
         }}
-        disabled={isConnecting}
-        color="primary"  variant="flat"
+        isLoading={isConnecting}
+        color="primary" className="text-white"  variant="solid"
       >
         { isConnecting ? 'Connecting...' : 'Connect your wallet' }
       </Button>
